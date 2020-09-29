@@ -160,6 +160,9 @@ Header files for development with %{name}.
 %configure \
 	--disable-static \
 	--disable-silent-rules \
+	--with-sysusersdir=%{_sysusersdir} \
+	--with-tmpfilesdir=%{_tmpfilesdir} \
+	--with-runstatedir=%{_rundir} \
 	--with-udevrulesdir=%{_udevrulesdir} \
 	--with-udevrulesprefix=%{udevrules_prefix}
 
