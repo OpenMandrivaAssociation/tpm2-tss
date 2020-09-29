@@ -178,10 +178,10 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %doc README.md CHANGELOG.md
 %license LICENSE
 %dir %{_sysconfdir}/tpm2-tss
-%{_tmpfilesdir}/tpm2-tss-fapi.conf
+%{_tmpfilesdir}/*.conf
 %{_udevrulesdir}/%{udevrules_prefix}tpm-udev.rules
 %{_sysconfdir}/tpm2-tss/*
-%{_sysusersdir}/%{name}.conf
+%{_sysusersdir}/*.conf
 %{_mandir}/man5/fapi-config.5.*
    
 %files -n %{libtss2_mu}
