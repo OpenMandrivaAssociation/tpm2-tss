@@ -2,6 +2,7 @@
 %define libtss2_mu %mklibname tss2-mu %{major}
 %define libtss2_sys %mklibname tss2-sys %{major}
 %define libtss2_esys %mklibname tss2-esys %{major}
+%define libtss2_fapi %mklibname tss2-fapi %{major}
 %define libtss2_rc %mklibname tss2-rc %{major}
 %define libtss2_tctildr %mklibname tss2-tctildr %{major}
 %define libtss2_tcti_d %mklibname tss2-tcti-device %{major}
@@ -74,6 +75,17 @@ APIs for applications to access TPM module through kernel TPM drivers.
 
 #------------------------------------------------
 
+%package -n %{libtss2_fapi}
+Summary:        TPM2.0 Software Stack
+Group:          System/Libraries
+Recommends:     %{name} >= %{EVRD}
+	
+%description -n %{libtss2_fapi}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+#------------------------------------------------
+
 %package -n %{libtss2_rc}
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
@@ -128,6 +140,7 @@ Group:		Development/C++
 Requires:	%{libtss2_mu} = %{EVRD}
 Requires:	%{libtss2_sys} = %{EVRD}
 Requires:	%{libtss2_esys} = %{EVRD}
+Requires:	%{libtss2_fapi} = %{EVRD}
 Requires:	%{libtss2_rc} = %{EVRD}
 Requires:	%{libtss2_tctildr} = %{EVRD}
 Requires:	%{libtss2_tcti_d} = %{EVRD}
@@ -164,9 +177,13 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %files
 %doc README.md CHANGELOG.md
 %license LICENSE
+%dir %{_sysconfdir}/tpm2-tss
+%{_tmpfilesdir}/tpm2-tss-fapi.conf
 %{_udevrulesdir}/%{udevrules_prefix}tpm-udev.rules
+%{_sysconfdir}/tpm2-tss/*
 %{_sysusersdir}/%{name}.conf
-
+%{_mandir}/man5/fapi-config.5.*
+   
 %files -n %{libtss2_mu}
 %{_libdir}/libtss2-mu.so.%{major}{,.*}
 
@@ -175,6 +192,9 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %files -n %{libtss2_esys}
 %{_libdir}/libtss2-esys.so.%{major}{,.*}
+
+%files -n %{libtss2_fapi}
+%{_libdir}/libtss2-fapi.so.%{major}{,.*}
 
 %files -n %{libtss2_rc}
 %{_libdir}/libtss2-rc.so.%{major}{,.*}
@@ -193,6 +213,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/libtss2-mu.so
 %{_libdir}/libtss2-sys.so
 %{_libdir}/libtss2-esys.so
+%{_libdir}/libtss2-fapi.so
 %{_libdir}/libtss2-rc.so
 %{_libdir}/libtss2-tctildr.so
 %{_libdir}/libtss2-tcti-device.so
@@ -200,6 +221,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/pkgconfig/tss2-mu.pc
 %{_libdir}/pkgconfig/tss2-sys.pc
 %{_libdir}/pkgconfig/tss2-esys.pc
+%{_libdir}/pkgconfig/tss2-fapi.pc
 %{_libdir}/pkgconfig/tss2-rc.pc
 %{_libdir}/pkgconfig/tss2-tctildr.pc
 %{_libdir}/pkgconfig/tss2-tcti-device.pc
