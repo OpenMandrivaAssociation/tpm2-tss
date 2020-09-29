@@ -195,7 +195,6 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/libtss2-esys.so
 %{_libdir}/libtss2-rc.so
 %{_libdir}/libtss2-tctildr.so
-%{_libdir}/libtss2-tcti-default.so
 %{_libdir}/libtss2-tcti-device.so
 %{_libdir}/libtss2-tcti-mssim.so
 %{_libdir}/pkgconfig/tss2-mu.pc
