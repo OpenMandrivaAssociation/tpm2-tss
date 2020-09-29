@@ -29,6 +29,7 @@ BuildRequires:	systemd-macros
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(json-c)
+BuildRequires:	pkgconfig(libcurl)
 
 %description
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
