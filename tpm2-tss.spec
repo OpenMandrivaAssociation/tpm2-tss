@@ -12,7 +12,7 @@
 %define udevrules_prefix 60-
 
 Name:		tpm2-tss
-Version:	2.4.3
+Version:	2.4.6
 Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
@@ -26,7 +26,7 @@ Source1:	%{name}.conf
 BuildRequires:	doxygen
 BuildRequires:	autoconf-archive
 BuildRequires:	libtool
-BuildRequires:	systemd-macros
+BuildRequires:	systemd-rpm-macros
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(json-c)
@@ -76,10 +76,10 @@ APIs for applications to access TPM module through kernel TPM drivers.
 #------------------------------------------------
 
 %package -n %{libtss2_fapi}
-Summary:        TPM2.0 Software Stack
-Group:          System/Libraries
-Recommends:     %{name} >= %{EVRD}
-	
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
 %description -n %{libtss2_fapi}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
 APIs. It sits between TPM driver and applications, providing TPM2.0 specified
@@ -186,7 +186,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_sysconfdir}/tpm2-tss/*
 %{_sysusersdir}/*.conf
 %{_mandir}/man5/fapi*.5.*
-   
+
 %files -n %{libtss2_mu}
 %{_libdir}/libtss2-mu.so.%{major}{,.*}
 
