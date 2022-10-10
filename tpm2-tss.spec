@@ -1,4 +1,4 @@
-%define major 0
+%define major 1
 %define libtss2_mu %mklibname tss2-mu %{major}
 %define libtss2_sys %mklibname tss2-sys %{major}
 %define libtss2_esys %mklibname tss2-esys %{major}
