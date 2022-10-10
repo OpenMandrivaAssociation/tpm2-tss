@@ -12,8 +12,8 @@
 %define udevrules_prefix 60-
 
 Name:		tpm2-tss
-Version:	2.4.6
-Release:	2
+Version:	3.2.0
+Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 # The entire source code is under BSD except implementation.h and tpmb.h which
