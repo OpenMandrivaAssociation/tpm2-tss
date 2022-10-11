@@ -2,7 +2,7 @@
 %define libtss2_mu %mklibname tss2-mu %{major}
 %define libtss2_sys %mklibname tss2-sys 1
 %define libtss2_esys %mklibname tss2-esys %{major}
-%define libtss2_fapi %mklibname tss2-fapi %{major}
+%define libtss2_fapi %mklibname tss2-fapi 1
 %define libtss2_rc %mklibname tss2-rc %{major}
 %define libtss2_tctildr %mklibname tss2-tctildr %{major}
 %define libtss2_tcti_d %mklibname tss2-tcti-device %{major}
@@ -197,7 +197,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/libtss2-esys.so.%{major}{,.*}
 
 %files -n %{libtss2_fapi}
-%{_libdir}/libtss2-fapi.so.%{major}{,.*}
+%{_libdir}/libtss2-fapi.so.1{,.*}
 
 %files -n %{libtss2_rc}
 %{_libdir}/libtss2-rc.so.%{major}{,.*}
