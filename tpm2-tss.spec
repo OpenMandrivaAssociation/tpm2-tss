@@ -260,7 +260,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %files -n %{libtss2_tcti_p}
 %{_libdir}/libtss2-tcti-pcap.so.%{major}{,.*}
 
-%files -n %{libtss2_tcti_m}
+%files -n %{libtss2_tcti_s}
 %{_libdir}/libtss2-tcti-swtpm.so.%{major}{,.*}
 
 %files -n %{develname}
