@@ -143,7 +143,7 @@ Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
 
-%description -n %{libtss2_tcti_m}
+%description -n %{libtss2_tcti_c}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
 APIs. It sits between TPM driver and applications, providing TPM2.0 specified
 APIs for applications to access TPM module through kernel TPM drivers.
@@ -155,7 +155,7 @@ Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
 
-%description -n %{libtss2_tcti_m}
+%description -n %{libtss2_tcti_p}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
 APIs. It sits between TPM driver and applications, providing TPM2.0 specified
 APIs for applications to access TPM module through kernel TPM drivers.
@@ -167,7 +167,7 @@ Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
 
-%description -n %{libtss2_tcti_m}
+%description -n %{libtss2_tcti_s}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
 APIs. It sits between TPM driver and applications, providing TPM2.0 specified
 APIs for applications to access TPM module through kernel TPM drivers.
