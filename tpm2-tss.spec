@@ -1,6 +1,6 @@
-%define major 1
+%define major 0
 %define libtss2_mu %mklibname tss2-mu %{major}
-%define libtss2_sys %mklibname tss2-sys %{major}
+%define libtss2_sys %mklibname tss2-sys 1
 %define libtss2_esys %mklibname tss2-esys %{major}
 %define libtss2_fapi %mklibname tss2-fapi %{major}
 %define libtss2_rc %mklibname tss2-rc %{major}
@@ -191,7 +191,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/libtss2-mu.so.%{major}{,.*}
 
 %files -n %{libtss2_sys}
-%{_libdir}/libtss2-sys.so.%{major}{,.*}
+%{_libdir}/libtss2-sys.so.1{,.*}
 
 %files -n %{libtss2_esys}
 %{_libdir}/libtss2-esys.so.%{major}{,.*}
