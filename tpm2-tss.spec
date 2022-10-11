@@ -7,6 +7,10 @@
 %define libtss2_tctildr %mklibname tss2-tctildr %{major}
 %define libtss2_tcti_d %mklibname tss2-tcti-device %{major}
 %define libtss2_tcti_m %mklibname tss2-tcti-mssim %{major}
+%define libtss2_tcti_c %mklibname tss2-tcti-cmd %{major}
+%define libtss2_tcti_p %mklibname tss2-tcti-pcap %{major}
+%define libtss2_tcti_s %mklibname tss2-tcti-swtpm %{major}
+
 %define develname %mklibname %{name} -d
 
 %define udevrules_prefix 60-
@@ -134,6 +138,42 @@ APIs for applications to access TPM module through kernel TPM drivers.
 
 #------------------------------------------------
 
+%package -n %{libtss2_tcti_c}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_m}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_p}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_m}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_s}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_m}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
 %package -n %{develname}
 Summary:	Development package for %{name}
 Group:		Development/C++
@@ -145,6 +185,9 @@ Requires:	%{libtss2_rc} = %{EVRD}
 Requires:	%{libtss2_tctildr} = %{EVRD}
 Requires:	%{libtss2_tcti_d} = %{EVRD}
 Requires:	%{libtss2_tcti_m} = %{EVRD}
+Requires:	%{libtss2_tcti_c} = %{EVRD}
+Requires:	%{libtss2_tcti_p} = %{EVRD}
+Requires:	%{libtss2_tcti_s} = %{EVRD}
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{develname}
@@ -211,6 +254,15 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %files -n %{libtss2_tcti_m}
 %{_libdir}/libtss2-tcti-mssim.so.%{major}{,.*}
 
+%files -n %{libtss2_tcti_c}
+%{_libdir}/libtss2-tcti-cmd.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_p}
+%{_libdir}/libtss2-tcti-pcap.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_m}
+%{_libdir}/libtss2-tcti-swtpm.so.%{major}{,.*}
+
 %files -n %{develname}
 %{_includedir}/tss2/
 %{_libdir}/libtss2-mu.so
@@ -221,6 +273,9 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/libtss2-tctildr.so
 %{_libdir}/libtss2-tcti-device.so
 %{_libdir}/libtss2-tcti-mssim.so
+%{_libdir}/libtss2-tcti-cmd.so
+%{_libdir}/libtss2-tcti-pcap.so
+%{_libdir}/libtss2-tcti-swtpm.so
 %{_libdir}/pkgconfig/tss2-mu.pc
 %{_libdir}/pkgconfig/tss2-sys.pc
 %{_libdir}/pkgconfig/tss2-esys.pc
@@ -229,5 +284,8 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/pkgconfig/tss2-tctildr.pc
 %{_libdir}/pkgconfig/tss2-tcti-device.pc
 %{_libdir}/pkgconfig/tss2-tcti-mssim.pc
+%{_libdir}/pkgconfig/tss2-tcti-cmd.pc
+%{_libdir}/pkgconfig/tss2-tcti-pcap.pc
+%{_libdir}/pkgconfig/tss2-tcti-swtpm.pc
 %{_mandir}/man3/*.3.*
 %{_mandir}/man7/tss2*.7.*
