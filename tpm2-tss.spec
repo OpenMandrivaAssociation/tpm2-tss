@@ -16,7 +16,7 @@
 %define udevrules_prefix 60-
 
 Name:		tpm2-tss
-Version:	3.2.0
+Version:	3.2.1
 Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
