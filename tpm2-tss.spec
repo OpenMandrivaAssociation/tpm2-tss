@@ -17,7 +17,7 @@
 
 Name:		tpm2-tss
 Version:	3.2.1
-Release:	1
+Release:	2
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 # The entire source code is under BSD except implementation.h and tpmb.h which
