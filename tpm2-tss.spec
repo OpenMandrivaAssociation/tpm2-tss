@@ -16,8 +16,8 @@
 %define udevrules_prefix 60-
 
 Name:		tpm2-tss
-Version:	3.2.1
-Release:	2
+Version:	3.2.2
+Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 # The entire source code is under BSD except implementation.h and tpmb.h which
@@ -228,7 +228,7 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_udevrulesdir}/%{udevrules_prefix}tpm-udev.rules
 %{_sysconfdir}/tpm2-tss/*
 %{_sysusersdir}/*.conf
-%{_mandir}/man5/fapi*.5.*
+%doc %{_mandir}/man5/fapi*.5.*
 
 %files -n %{libtss2_mu}
 %{_libdir}/libtss2-mu.so.%{major}{,.*}
@@ -264,28 +264,9 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 %{_libdir}/libtss2-tcti-swtpm.so.%{major}{,.*}
 
 %files -n %{develname}
-%{_includedir}/tss2/
-%{_libdir}/libtss2-mu.so
-%{_libdir}/libtss2-sys.so
-%{_libdir}/libtss2-esys.so
-%{_libdir}/libtss2-fapi.so
-%{_libdir}/libtss2-rc.so
-%{_libdir}/libtss2-tctildr.so
-%{_libdir}/libtss2-tcti-device.so
-%{_libdir}/libtss2-tcti-mssim.so
-%{_libdir}/libtss2-tcti-cmd.so
-%{_libdir}/libtss2-tcti-pcap.so
-%{_libdir}/libtss2-tcti-swtpm.so
-%{_libdir}/pkgconfig/tss2-mu.pc
-%{_libdir}/pkgconfig/tss2-sys.pc
-%{_libdir}/pkgconfig/tss2-esys.pc
-%{_libdir}/pkgconfig/tss2-fapi.pc
-%{_libdir}/pkgconfig/tss2-rc.pc
-%{_libdir}/pkgconfig/tss2-tctildr.pc
-%{_libdir}/pkgconfig/tss2-tcti-device.pc
-%{_libdir}/pkgconfig/tss2-tcti-mssim.pc
-%{_libdir}/pkgconfig/tss2-tcti-cmd.pc
-%{_libdir}/pkgconfig/tss2-tcti-pcap.pc
-%{_libdir}/pkgconfig/tss2-tcti-swtpm.pc
-%{_mandir}/man3/*.3.*
-%{_mandir}/man7/tss2*.7.*
+%dir %{_includedir}/tss2
+%{_includedir}/tss2/*
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/*.pc
+%doc %{_mandir}/man3/*.3.*
+%doc %{_mandir}/man7/tss2*.7.*
