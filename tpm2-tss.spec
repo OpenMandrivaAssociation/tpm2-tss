@@ -1,22 +1,43 @@
 %define major 0
-%define libtss2_mu %mklibname tss2-mu %{major}
-%define libtss2_sys %mklibname tss2-sys 1
-%define libtss2_esys %mklibname tss2-esys %{major}
-%define libtss2_fapi %mklibname tss2-fapi 1
-%define libtss2_rc %mklibname tss2-rc %{major}
-%define libtss2_tctildr %mklibname tss2-tctildr %{major}
-%define libtss2_tcti_d %mklibname tss2-tcti-device %{major}
-%define libtss2_tcti_m %mklibname tss2-tcti-mssim %{major}
-%define libtss2_tcti_c %mklibname tss2-tcti-cmd %{major}
-%define libtss2_tcti_p %mklibname tss2-tcti-pcap %{major}
-%define libtss2_tcti_s %mklibname tss2-tcti-swtpm %{major}
+%define oldlibtss2_mu %mklibname tss2-mu %{major}
+%define oldlibtss2_sys %mklibname tss2-sys 1
+%define oldlibtss2_esys %mklibname tss2-esys %{major}
+%define oldlibtss2_fapi %mklibname tss2-fapi 1
+%define oldlibtss2_rc %mklibname tss2-rc %{major}
+%define oldlibtss2_tctildr %mklibname tss2-tctildr %{major}
+%define oldlibtss2_tcti_d %mklibname tss2-tcti-device %{major}
+%define oldlibtss2_tcti_m %mklibname tss2-tcti-mssim %{major}
+%define oldlibtss2_tcti_c %mklibname tss2-tcti-cmd %{major}
+%define oldlibtss2_tcti_p %mklibname tss2-tcti-pcap %{major}
+%define oldlibtss2_tcti_s %mklibname tss2-tcti-swtpm %{major}
+%define libtss2_mu %mklibname tss2-mu
+%define libtss2_sys %mklibname tss2-sys
+%define libtss2_esys %mklibname tss2-esys
+%define libtss2_fapi %mklibname tss2-fapi
+%define libtss2_rc %mklibname tss2-rc
+%define libtss2_tctildr %mklibname tss2-tctildr
+%define libtss2_tcti_d %mklibname tss2-tcti-device
+%define libtss2_tcti_m %mklibname tss2-tcti-mssim
+%define libtss2_tcti_c %mklibname tss2-tcti-cmd
+%define libtss2_tcti_p %mklibname tss2-tcti-pcap
+%define libtss2_tcti_s %mklibname tss2-tcti-swtpm
+# (No old* bits for these libraries because they were added after
+# versioning was fixed)
+%define libtss2_policy %mklibname tss2-policy
+%define libtss2_tcti_spi_helper %mklibname tss2-tcti-spi-helper
 
 %define develname %mklibname %{name} -d
 
 %define udevrules_prefix 60-
 
+# Workaround for libtool thinking it has to inject an rpath
+# at make install time (which clang doesn't like)
+%if %{cross_compiling}
+%define prefer_gcc 1
+%endif
+
 Name:		tpm2-tss
-Version:	3.2.2
+Version:	4.0.1
 Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
@@ -47,6 +68,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_mu}
 
 %description -n %{libtss2_mu}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -59,6 +81,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_sys}
 
 %description -n %{libtss2_sys}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -71,6 +94,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_esys}
 
 %description -n %{libtss2_esys}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -83,6 +107,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_fapi}
 
 %description -n %{libtss2_fapi}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -94,6 +119,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_rc}
 
 %description -n %{libtss2_rc}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -106,6 +132,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_tctildr}
 
 %description -n %{libtss2_tctildr}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -118,6 +145,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_tcti_d}
 
 %description -n %{libtss2_tcti_d}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -130,6 +158,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_tcti_m}
 
 %description -n %{libtss2_tcti_m}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -142,6 +171,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_tcti_c}
 
 %description -n %{libtss2_tcti_c}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -154,6 +184,7 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_tcti_p}
 
 %description -n %{libtss2_tcti_p}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -166,11 +197,37 @@ APIs for applications to access TPM module through kernel TPM drivers.
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 Recommends:	%{name} >= %{EVRD}
+%rename %{oldlibtss2_tcti_s}
 
 %description -n %{libtss2_tcti_s}
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
 APIs. It sits between TPM driver and applications, providing TPM2.0 specified
 APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_policy}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_policy}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_spi_helper}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_spi_helper}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
 
 #------------------------------------------------
 
@@ -188,6 +245,8 @@ Requires:	%{libtss2_tcti_m} = %{EVRD}
 Requires:	%{libtss2_tcti_c} = %{EVRD}
 Requires:	%{libtss2_tcti_p} = %{EVRD}
 Requires:	%{libtss2_tcti_s} = %{EVRD}
+Requires:	%{libtss2_policy} = %{EVRD}
+Requires:	%{libtss2_tcti_spi_helper} = %{EVRD}
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{develname}
@@ -262,6 +321,12 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %files -n %{libtss2_tcti_s}
 %{_libdir}/libtss2-tcti-swtpm.so.%{major}{,.*}
+
+%files -n %{libtss2_policy}
+%{_libdir}/libtss2-policy.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_spi_helper}
+%{_libdir}/libtss2-tcti-spi-helper.so.%{major}{,.*}
 
 %files -n %{develname}
 %dir %{_includedir}/tss2
