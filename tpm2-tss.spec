@@ -48,6 +48,10 @@ URL:		https://github.com/tpm2-software/tpm2-tss
 Source0:	https://github.com/tpm2-software/tpm2-tss/releases/download/%{version}/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
 
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	autoconf-archive
 BuildRequires:	libtool
