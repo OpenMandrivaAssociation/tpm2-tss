@@ -69,6 +69,8 @@ BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(json-c)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(uuid)
+# configure detects the presence of sysusers and tmpfiles
+BuildRequires:	systemd
 %if %{with ftdi}
 BuildRequires:	pkgconfig(libftdi1)
 %endif
