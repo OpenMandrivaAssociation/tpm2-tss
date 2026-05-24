@@ -21,6 +21,15 @@
 %define libtss2_tcti_c %mklibname tss2-tcti-cmd
 %define libtss2_tcti_p %mklibname tss2-tcti-pcap
 %define libtss2_tcti_s %mklibname tss2-tcti-swtpm
+%define libtss2_tcti_spi_helper %mklibname tss2-tcti-spi-helper
+%define libtss2_tcti_i2c_ftdi %mklibname tss2-tcti-i2c-ftdi
+%define libtss2_tcti_i2c_helper %mklibname tss2-tcti-i2c-helper
+%define libtss2_tcti_spi_ftdi %mklibname tss2-tcti-spi-ftdi
+%define libtss2_tcti_spi_ltt2go %mklibname tss2-tcti-spi-ltt2go
+%define libtss2_tcti_spidev %mklibname tss2-tcti-spidev
+
+%bcond_without ftdi
+
 # (No old* bits for these libraries because they were added after
 # versioning was fixed)
 %define libtss2_policy %mklibname tss2-policy
@@ -37,8 +46,8 @@
 %endif
 
 Name:		tpm2-tss
-Version:	4.0.1
-Release:	2
+Version:	4.1.3
+Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 # The entire source code is under BSD except implementation.h and tpmb.h which
@@ -49,18 +58,23 @@ Source0:	https://github.com/tpm2-software/tpm2-tss/releases/download/%{version}/
 Source1:	%{name}.conf
 
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	autoconf-archive
-BuildRequires:	libtool
+BuildRequires:	slibtool
 BuildRequires:	systemd-rpm-macros
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(json-c)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(uuid)
+%if %{with ftdi}
+BuildRequires:	pkgconfig(libftdi1)
+%endif
+
+%patchlist
+tpm2-tss-openssl-4.0.patch
 
 %description
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
@@ -233,6 +247,65 @@ tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
 APIs. It sits between TPM driver and applications, providing TPM2.0 specified
 APIs for applications to access TPM module through kernel TPM drivers.
 
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_i2c_ftdi}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_i2c_ftdi}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_i2c_helper}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_i2c_helper}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_spi_ftdi}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_spi_ftdi}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_spi_ltt2go}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_spi_ltt2go}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
+
+#------------------------------------------------
+
+%package -n %{libtss2_tcti_spidev}
+Summary:	TPM2.0 Software Stack
+Group:		System/Libraries
+Recommends:	%{name} >= %{EVRD}
+
+%description -n %{libtss2_tcti_spidev}
+tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
+APIs. It sits between TPM driver and applications, providing TPM2.0 specified
+APIs for applications to access TPM module through kernel TPM drivers.
 
 #------------------------------------------------
 
@@ -270,6 +343,10 @@ Header files for development with %{name}.
 	--with-sysusersdir=%{_sysusersdir} \
 	--with-tmpfilesdir=%{_tmpfilesdir} \
 	--with-runstatedir=%{_rundir} \
+%if ! %{with ftdi}
+	--disable-tcti-i2c-ftdi \
+	--disable-tcti-spi-ftdi \
+%endif
 	--with-udevrulesdir=%{_udevrulesdir} \
 	--with-udevrulesprefix=%{udevrules_prefix}
 
@@ -332,6 +409,23 @@ install -D -m 0644 %{SOURCE1} %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %files -n %{libtss2_tcti_spi_helper}
 %{_libdir}/libtss2-tcti-spi-helper.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_i2c_helper}
+%{_libdir}/libtss2-tcti-i2c-helper.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_spidev}
+%{_libdir}/libtss2-tcti-spidev.so.%{major}{,.*}
+
+%if %{with ftdi}
+%files -n %{libtss2_tcti_i2c_ftdi}
+%{_libdir}/libtss2-tcti-i2c-ftdi.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_spi_ftdi}
+%{_libdir}/libtss2-tcti-spi-ftdi.so.%{major}{,.*}
+
+%files -n %{libtss2_tcti_spi_ltt2go}
+%{_libdir}/libtss2-tcti-spi-ltt2go.so.%{major}{,.*}
+%endif
 
 %files -n %{develname}
 %dir %{_includedir}/tss2
