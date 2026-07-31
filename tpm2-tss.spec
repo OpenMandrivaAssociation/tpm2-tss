@@ -46,8 +46,8 @@
 %endif
 
 Name:		tpm2-tss
-Version:	4.1.3
-Release:	2
+Version:	4.2.0
+Release:	1
 Summary:	TPM2.0 Software Stack
 Group:		System/Libraries
 # The entire source code is under BSD except implementation.h and tpmb.h which
@@ -76,7 +76,7 @@ BuildRequires:	pkgconfig(libftdi1)
 %endif
 
 %patchlist
-tpm2-tss-openssl-4.0.patch
+# dropped (no longer applies): tpm2-tss-openssl-4.0.patch
 
 %description
 tpm2-tss is a software stack supporting Trusted Platform Module(TPM) 2.0 system
